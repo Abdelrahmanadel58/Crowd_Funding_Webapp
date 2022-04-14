@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appdjango
+  labels:
+    app: appdjango
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appdjango
+  template:
+    metadata:
+      labels:
+        app: appdjango
+    spec:
+      containers:
+      - name: appdjango
+        image: abdelrahman58/django-app
+        ports:
+        - containerPort: 8000
