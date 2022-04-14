@@ -31,14 +31,16 @@ pipeline {
              }
       stage('Deploy') {
             steps {
+               withCredentials([file(credentialsId: 'k8s', variable: 'Secretfile')]) {
                 script {
                         sh """
                             cd deploy-appdjango/
-                            kubectl apply -f .
+                            kubectl apply -f . --kubeconfig=$Secretfile
                         """
                     }
                 }
             }
+         }
       }
     
 }
