@@ -48,10 +48,6 @@ pipeline {
                         sh """
                             cd sonarqube/
                             kubectl apply -f . --kubeconfig=$Secretfile
-                            echo application with nginx link
-                            minikube service nodeport-nginx --url
-                            echo sonarqube link 
-                            minikube service sonarqube --url
                         """
                     }
                 }
