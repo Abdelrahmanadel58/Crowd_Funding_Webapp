@@ -29,12 +29,24 @@ pipeline {
 
                 }
              }
-        stage('Deploy') {
+        stage('Deploy-application') {
             steps {
                withCredentials([file(credentialsId: 'k8s', variable: 'Secretfile')]) {
                 script {
                         sh """
                             cd deploy-appdjango/
+                            kubectl apply -f . --kubeconfig=$Secretfile
+                        """
+                    }
+                }
+            }
+         }
+        stage('Deploy-sonarqube') {
+            steps {
+               withCredentials([file(credentialsId: 'k8s', variable: 'Secretfile')]) {
+                script {
+                        sh """
+                            cd sonarqube/
                             kubectl apply -f . --kubeconfig=$Secretfile
                         """
                     }
