@@ -1,5 +1,4 @@
 node {
-  agent { label 'slave' }
   stage('SCM') {
     checkout scm
   }
